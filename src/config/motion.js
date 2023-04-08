@@ -22,6 +22,15 @@ export const slideAnimation = (direction) => {
 	};
 };
 
+export const popupAnimation = {
+	initial: {
+		opacity: 0,
+		transition,
+	},
+	animate: { opacity: 1, transition },
+	exit: { opacity: 0, transition },
+};
+
 export const fadeAnimation = {
 	initial: {
 		opacity: 0,

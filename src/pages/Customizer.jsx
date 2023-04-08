@@ -10,7 +10,11 @@ import {
 	DecalTypes,
 	DownloadTab,
 } from '../config/constants';
-import { fadeAnimation, slideAnimation } from '../config/motion';
+import {
+	fadeAnimation,
+	popupAnimation,
+	slideAnimation,
+} from '../config/motion';
 import { ColorPicker, CustomButton, FilePicker, Tab } from '../components';
 
 const Customizer = () => {
@@ -69,6 +73,15 @@ const Customizer = () => {
 		});
 	};
 
+	const handleOpenPopup = (tabName) => {
+		console.log(tabName, activeEditorTab);
+		if (tabName === activeEditorTab) {
+			return setActiveEditorTab('');
+		}
+
+		setActiveEditorTab(tabName);
+	};
+
 	return (
 		<AnimatePresence>
 			{!snap.intro && (
@@ -84,10 +97,12 @@ const Customizer = () => {
 									<Tab
 										key={tab.name}
 										tab={tab}
-										handleClick={() => setActiveEditorTab(tab.name)}
+										handleClick={() => handleOpenPopup(tab.name)}
 									/>
 								))}
-								{generateTabContent()}
+								<AnimatePresence mode='wait'>
+									{generateTabContent()}
+								</AnimatePresence>
 							</div>
 						</div>
 					</motion.div>
